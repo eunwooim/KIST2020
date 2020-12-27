@@ -1,6 +1,6 @@
 import os
 import cv2
-from functions import walk, isdm3, predcir
+from computervision import walk, isdm3, predcir
 
 ring=spot=error=count=0
 for folder, filename in walk(destdir):
@@ -29,3 +29,4 @@ for folder, filename in walk(destdir):
     except:
         print("error %s [%d]" % (filepath,count))
         err += 1
+print(ring, spot, err)
