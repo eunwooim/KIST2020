@@ -1,6 +1,6 @@
 # Classification of TEM Diffraction Patterns via Deep Learning and Computer Vision
 
-####### Sorry that I cannot upload data or images due to copyright and security reasons.
+###### Sorry that I cannot upload data or images due to copyright and security reasons.
 
 ## Introduction
 In Crystallography, Transmission Electron Microscopy(TEM) is a microscopy technique that allows us to analyze crystal structure by diffraction pattern.
