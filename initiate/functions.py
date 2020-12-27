@@ -255,3 +255,33 @@ def fit_line_ransac(data,iter=30,sample_num=10,offset=80.0):
 			      effective_sample = ran_sample
 	return fit_rotated_ellipse(effective_sample)
   
+def plot_confusion_matrix(data, labels, output_filename):
+    """Plot confusion matrix using heatmap.
+    Args:
+        data (list of list): List of lists with confusion matrix data.
+        labels (list): Labels which will be plotted across x and y axis.
+        output_filename (str): Path to output file.
+    """
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    sns.set(color_codes=True)
+    plt.figure(1, figsize=(9, 6))
+    plt.title("Confusion Matrix")
+    sns.set(font_scale=1.2)
+    ax = sns.heatmap(data, annot=True, cmap="Blues", cbar_kws={'label': 'Scale'},fmt='.4g')
+    ax.set_xticklabels(labels)
+    ax.set_yticklabels(labels)
+    ax.set(ylabel="Actual", xlabel="Predicted")
+    plt.show(output_filename)
+    plt.close()
+    plt.savefig(output_filename)
+# define data
+import numpy as np
+cm = np.array([[1979,3],
+               [7,996]])
+# cm = np.array(cm)
+# define labels
+labels = labels
+# create confusion matrix
+plot_confusion_matrix(cm, labels, "C:/Users/im/Desktop/confusion_matrix.png")
+print('Accuracy : ',cm.trace()/cm.sum())
