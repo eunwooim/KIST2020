@@ -1,8 +1,11 @@
 import os
 import cv2
-from computervision import walk, isdm3, predcir
+from functions import walk, isdm3
+from computervision import predcir
 
 ring=spot=error=count=0
+ringdir = 'C:/Users/im/Desktop/ringpattern'
+spotdir = 'C:/Users/im/Desktop/spotpattern'
 for folder, filename in walk(destdir):
     ext = os.path.splitext(filename)[-1]
     if not isdm3(ext):
