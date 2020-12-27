@@ -161,6 +161,11 @@ def matchhist(img,ref):
     return matched
 
 def predcir(name):
+    '''
+    Predict whether the dm3 image has circle
+    if circle exist, return circled image and 1
+    if not, return preprocessed image and 0
+    '''
     x = loaddm3(name)
     img = matnorm255(x)
     img1 = matchhist(img,ref)
@@ -179,6 +184,7 @@ def predcir(name):
         return [src,1]
     
 def imshow(img):
+    '''Pop up the image'''
     img = img.astype(np.uint8)
     cv2.imshow('img',img)
     cv2.waitKey(0)
@@ -186,23 +192,27 @@ def imshow(img):
     return
 
 def gaussianSmoothing(img,kersize=5,sig=2):
+    '''Apply Gaussian Smoothing'''
     kernel = cv2.getGaussianKernel(kersize,sig)
     ker = np.outer(kernel, kernel.transpose())
     img = cv2.filter2D(img, -1, ker)
     return img
 
 def highfreqimg(img,kersize=5,sig=2):
+    '''Return High Frequency Image by Subtracting Original Image and Smoothed Image'''
     blur = gaussianSmoothing(img,kersize,sig)
     high = img - blur + 128
     return high
 
 def dm3toimg(filepath,ref):
+    '''.dm3 data to contrast adjusted image'''
     x = hs.load(filepath).data
     img = matnorm255(x,len(ref))
     img = matchhist(img,ref)
     return img
     
 def rotate_images(X_imgs, start_angle, end_angle, n_images):
+    '''Rotate image with input angle'''
     X_rotate = []
     iterate_at = (end_angle - start_angle) / (n_images - 1)
     from math import pi
