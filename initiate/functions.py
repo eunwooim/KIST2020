@@ -287,6 +287,7 @@ plot_confusion_matrix(cm, labels, "C:/Users/im/Desktop/confusion_matrix.png")
 print('Accuracy : ',cm.trace()/cm.sum())
 
 def plot_history(csvpath):
+    '''Plot loss, accuracy of training, validation set'''
     loss=[];accuracy=[];val_loss=[];val_accuracy=[]
     with open(csvpath,'r') as f:
         rdf = csv.reader(f)
