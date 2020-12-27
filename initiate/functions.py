@@ -285,3 +285,30 @@ labels = labels
 # create confusion matrix
 plot_confusion_matrix(cm, labels, "C:/Users/im/Desktop/confusion_matrix.png")
 print('Accuracy : ',cm.trace()/cm.sum())
+
+def plot_history(csvpath):
+    loss=[];accuracy=[];val_loss=[];val_accuracy=[]
+    with open(csvpath,'r') as f:
+        rdf = csv.reader(f)
+        for num in rdf:
+            loss.append(num[1])
+            accuracy.append(num[2])
+            val_loss.append(num[3])
+            val_accuracy.append(num[4])
+    loss=np.array(loss[1:]).astype(np.float64)
+    accuracy=np.array(accuracy[1:]).astype(np.float64)
+    val_loss=np.array(val_loss[1:]).astype(np.float64)
+    val_accuracy=np.array(val_accuracy[1:]).astype(np.float64)
+    f.close()
+    fig, loss_ax = plt.subplots()
+    acc_ax = loss_ax.twinx()
+    plt.figure(figsize=(12,9))
+    loss_ax.plot(loss, 'y', label='train loss')
+    loss_ax.plot(val_loss, 'r', label='val loss')
+    loss_ax.set_xlabel('epoch')
+    loss_ax.set_ylabel('loss')
+    loss_ax.legend(loc='lower right',bbox_to_anchor=(1.05, 1))
+    acc_ax.plot(accuracy, 'b', label='train acc')
+    acc_ax.plot(val_accuracy, 'g', label='val acc')
+    acc_ax.set_ylabel('accuracy')
+    acc_ax.legend(loc='upper right',bbox_to_anchor=(1.3, 1.2))
