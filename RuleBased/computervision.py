@@ -2,6 +2,7 @@ import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from skimage.exposure import match_histograms
 
 def matnorm255(matrix,size=500,v=None):
     '''Convert raw matrix into uint8 image matrix with Adjusted Contrast'''
