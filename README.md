@@ -18,3 +18,4 @@ The final result was derived by averaging the results of the three models using 
 Accuracy was nearly 99.798%
 
 ## Conclusion
+Deep learning model performed better than the rule-based method. With Grad-CAM, we can see that the model predicted through center beam or scattered spots.
