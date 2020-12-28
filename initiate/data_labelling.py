@@ -1,6 +1,7 @@
 #Labelling
 import os
-from functions import walk, loaddm3, matnorm255, matchhist, imshow
+from functions import walk, loaddm3, 
+from computervision import matnorm255, matchhist, imshow
 
 f = open('classifier.csv','w')
 count=0
