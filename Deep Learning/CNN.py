@@ -50,49 +50,6 @@ def save_history_plot(hist,path):
     # plt.show()
     plt.close('all')
 
-noise = np.random.normal(-5e-4,5e-4,(100,100))
-ref = matnorm255(hs.load('/home/imeunu96/diffraction_patterns/Dataset2_Hour_00_Minute_00_Second_06_Frame_0001.dm3').data)
-ref = clahe(ref.astype(np.uint8),cliplimit=5)
-ref = ref + noise
-ref = erode(ref)
-ref = matnorm255(ref)
-
-#Generating Dataset
-docX = []
-docY = []
-f = pd.read_excel('/home/imeunu96/ML/code/savehere/lesseph.xlsx')
-df = f.copy()
-indexNames = df[ df['classified'] == 2 ].index
-df.drop(indexNames , inplace=True)
-df.to_excel('/home/imeunu96/ML/code/savehere/lesseph_without2.xlsx',index=False)
-
-f = pd.read_excel('/home/imeunu96/ML/code/savehere/lesseph_without2.xlsx')
-for classified in f['classified']:
-    for i in range(8):
-        docY.append(classified)
-print('Y_data Loaded')
-# filename = np.array(x)
-Y_data = np.array(docY)
-for filepath in f['filepath']:
-    try:
-        print('loading %s' % (filepath))
-        path = escape_square_brackets(filepath)
-        img = dm3toimg(path,ref).astype(np.uint8)
-        for i in range(0,360,45):
-            (h, w) = img.shape[:2]
-            (cX, cY) = (w / 2, h / 2)
-            M = cv2.getRotationMatrix2D((cX, cY), i, 1.0)
-            rotated = cv2.warpAffine(img, M, (w, h))
-            docX.append(rotated)
-    except:
-        print('failed %s' %(filepath))
-        nx = np.where(f['filepath'] == filepath)
-        Y_data = np.delete(Y_data, nx[0][0])
-X_data = np.array(docX)
-docX.clear();docY.clear()
-np.save('/home/imeunu96/ML/code/savehere/X_data.npy',X_data)
-np.save('/home/imeunu96/ML/code/savehere/Y_data.npy',Y_data)
-
 #Loading Dataset
 X_data = np.load('/home/imeunu96/ML/1126_cnn8aug/X_data.npy')
 Y_data = np.load('/home/imeunu96/ML/1126_cnn8aug/Y_data.npy')
