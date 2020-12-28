@@ -45,3 +45,4 @@ X_data = np.array(docX)
 docX.clear();docY.clear()
 np.save('/home/imeunu96/ML/code/savehere/X_data.npy',X_data)
 np.save('/home/imeunu96/ML/code/savehere/Y_data.npy',Y_data)
+  #saved as .npy files
