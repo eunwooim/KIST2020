@@ -190,3 +190,12 @@ def rotate_images(img, angle):
     M = cv2.getRotationMatrix2D((cX, cY), angle, 1.0)
     rotated = cv2.warpAffine(img, M, (w, h))
     return rotated
+
+def get_refeerence(size):
+	noise = np.random.normal(-5e-4,5e-4,(100,100))
+	ref = matnorm255(hs.load('/home/imeunu96/diffraction_patterns/Dataset2_Hour_00_Minute_00_Second_06_Frame_0001.dm3').data)
+	ref = clahe(ref.astype(np.uint8),cliplimit=5)
+	ref = ref + noise
+	ref = erode(ref)
+	ref = matnorm255(ref)
+	return ref
