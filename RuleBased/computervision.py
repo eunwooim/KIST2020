@@ -189,4 +189,4 @@ def rotate_images(img, angle):
     (cX, cY) = (w / 2, h / 2)
     M = cv2.getRotationMatrix2D((cX, cY), angle, 1.0)
     rotated = cv2.warpAffine(img, M, (w, h))
-    return X_rot
+    return rotated
