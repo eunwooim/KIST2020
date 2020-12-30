@@ -10,10 +10,11 @@ I have tried Rule-based Method and Neural Network Models.
 Diffraction Patterns example : https://myscope.training/legacy/tem/background/concepts/imagegeneration/diffractionimages.php
 
 ## [Rule based Method](https://github.com/imeunu/KIST/tree/main/RuleBased)
-The way to intuitively distinguish them is whether or not a circle is detected. The methods used to detect circle is Hough Transformation and RANSAC.
+The way to intuitively distinguish them through [computer vision](https://github.com/imeunu/KIST/blob/main/RuleBased/computervision.py) is whether or not a circle is detected. The methods used to detect circle is Hough Transformation and RANSAC.
 Also, when Fast Fourier Transform is performed, the shape of a circle appears as a line, and attempted to detect a straight line.
 But found out that different images have different contrast. Thus it was necessary to adjust the contrast of the images collectively.
 CLAHE was used to create reference data with well-contrast adjustment, and match histograms were applied to the reference data for all other images.
+After adjusting the contrast, [Hough Trasformation](https://github.com/imeunu/KIST/blob/main/RuleBased/total_investigation.py) performed the best of the three methods.
 Accuracy was about 82.82%
 
 ## [Deep Learning Model](https://github.com/imeunu/KIST/tree/main/Deep%20Learning)
