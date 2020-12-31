@@ -40,7 +40,12 @@ def kth(arr, K):
                 break
     return memory[-1]
 
-
+def isdm3(ext):
+    dmlist = ['.dm3', '.dm4']
+    if ext in dmlist:
+        return True
+    else:
+        return False
 
 def loaddm3(filename):
     '''Load dm3 or dm4 raw matrix'''
