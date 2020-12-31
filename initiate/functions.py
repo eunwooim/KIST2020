@@ -39,6 +39,22 @@ def kth(arr, K):
                 memory[i] = n
                 break
     return memory[-1]
+
+
+
+def loaddm3(filename):
+    '''Load dm3 or dm4 raw matrix'''
+
+    if name[-4:] in ['.dm3', '.dm4']:
+        matrix = hs.load(filename.data)
+    else:
+        try:
+            newname = filename+'.dm3'
+            matrix = hs.load(newname).data
+        except:
+            newname = filename+'.dm4'
+            matrix = hs.load(newname).data
+    return matrix
   
 def plot_confusion_matrix(data, labels, output_filename):
     """Plot confusion matrix using heatmap.
@@ -63,7 +79,7 @@ def plot_confusion_matrix(data, labels, output_filename):
     # define data
     import numpy as np
     cm = np.array([[1979,3],
-                   [7,996]])
+                [7,996]])
     # cm = np.array(cm)
     # define labels
     labels = labels
