@@ -163,25 +163,25 @@ def dm3toimg(filepath,ref):
     return img
 
 def fit_line_ransac(data,iter=30,sample_num=10,offset=80.0):
-	'''Fit line with RANSAC algorithm'''
-	count_max = 0
-	  effective_sample = None
-	  for i in range(iter):
-		  sample = np.random.choice(len(data), sample_num, replace=False)
-		    xs = data[sample][:,0].reshape(-1,1)
-		    ys = data[sample][:,1].reshape(-1,1)
-		J = np.mat( np.hstack((xs*ys,ys**2,xs, ys, np.ones_like(xs,dtype=np.float))) )
-		Y = np.mat(-1*xs**2)
-		P= (J.T * J).I * J.T * Y
-		# fitter a*x**2 + b*x*y + c*y**2 + d*x + e*y + f = 0
-		a = 1.0; b= P[0,0]; c= P[1,0]; d = P[2,0]; e= P[3,0]; f=P[4,0];
-		ellipse_model = lambda x,y : a*x**2 + b*x*y + c*y**2 + d*x + e*y + f
-		# threshold 
-		    ran_sample = np.array([[x,y] for (x,y) in data if np.abs(ellipse_model(x,y)) < offset ])
-		if(len(ran_sample) > count_max):
-			count_max = len(ran_sample) 
-			      effective_sample = ran_sample
-	return fit_rotated_ellipse(effective_sample)
+    '''Fit line with RANSAC algorithm'''
+    count_max = 0
+    effective_sample = None
+    for i in range(iter):
+        sample = np.random.choice(len(data), sample_num, replace=False)
+        xs = data[sample][:,0].reshape(-1,1)
+        ys = data[sample][:,1].reshape(-1,1)
+    J = np.mat( np.hstack((xs*ys,ys**2,xs, ys, np.ones_like(xs,dtype=np.float))) )
+    Y = np.mat(-1*xs**2)
+    P= (J.T * J).I * J.T * Y
+    # fitter a*x**2 + b*x*y + c*y**2 + d*x + e*y + f = 0
+    a = 1.0; b= P[0,0]; c= P[1,0]; d = P[2,0]; e= P[3,0]; f=P[4,0];
+    ellipse_model = lambda x,y : a*x**2 + b*x*y + c*y**2 + d*x + e*y + f
+    # threshold 
+    ran_sample = np.array([[x,y] for (x,y) in data if np.abs(ellipse_model(x,y)) < offset ])
+    if(len(ran_sample) > count_max):
+        count_max = len(ran_sample)
+        effective_sample = ran_sample
+    return fit_rotated_ellipse(effective_sample)
     
 def rotate_images(img, angle):
     '''Rotate image with input angle'''
