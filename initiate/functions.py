@@ -39,19 +39,6 @@ def kth(arr, K):
                 memory[i] = n
                 break
     return memory[-1]
-    
-def loaddm3(name):
-    '''Load dm3 or dm4 raw matrix'''
-    if name[-4:] in ['.dm3','.dm4']:
-        matrix = hs.load(name).data
-    else:
-        try:
-   	    newname = name+'.dm3'
-            matrix = hs.load(newname).data
-        except:
-            newname = name+'.dm4'
-            matrix = hs.load(newname).data
-    return matrix
   
 def plot_confusion_matrix(data, labels, output_filename):
     """Plot confusion matrix using heatmap.
@@ -73,16 +60,16 @@ def plot_confusion_matrix(data, labels, output_filename):
     plt.show(output_filename)
     plt.close()
     plt.savefig(output_filename)
-# define data
-import numpy as np
-cm = np.array([[1979,3],
-               [7,996]])
-# cm = np.array(cm)
-# define labels
-labels = labels
-# create confusion matrix
-plot_confusion_matrix(cm, labels, "C:/Users/im/Desktop/confusion_matrix.png")
-print('Accuracy : ',cm.trace()/cm.sum())
+    # define data
+    import numpy as np
+    cm = np.array([[1979,3],
+                   [7,996]])
+    # cm = np.array(cm)
+    # define labels
+    labels = labels
+    # create confusion matrix
+    plot_confusion_matrix(cm, labels, "C:/Users/im/Desktop/confusion_matrix.png")
+    print('Accuracy : ',cm.trace()/cm.sum())
 
 def plot_history(csvpath):
     '''Plot loss, accuracy of training, validation set'''
