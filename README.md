@@ -4,6 +4,7 @@
 
 ## Introduction
 In Crystallography, Transmission Electron Microscopy(TEM) is a microscopy technique that allows us to analyze crystal structure by diffraction pattern.
+<br>
 The two largest categories of diffraction patterns are Ring Pattern and Spot Pattern. Each of them requires different analyze method. In order to automate the analysis, it was necessary to develop an A.I. model that can classify them.
 I have tried Rule-based Method and Neural Network Models.
 
@@ -13,7 +14,8 @@ Diffraction Patterns example : https://myscope.training/legacy/tem/background/co
 The way to intuitively distinguish them through [computer vision](https://github.com/imeunu/KIST/blob/main/RuleBased/computervision.py) is whether or not a circle is detected. The methods used to detect circle is Hough Transformation and RANSAC.
 Also, when Fast Fourier Transform is performed, the shape of a circle appears as a line, and attempted to detect a straight line.
 But found out that different images have different contrast. Thus it was necessary to adjust the contrast of the images collectively.
-CLAHE was used to create reference data with well-contrast adjustment, and match histograms were applied to the reference data for all other images.
+<br>
+CLAHE was used to create reference data with well-contrast adjustment, and histogram matching is applied to the reference data for all other images.
 After adjusting the contrast, [Hough Trasformation](https://github.com/imeunu/KIST/blob/main/RuleBased/total_investigation.py) performed the best of the three methods.
 Accuracy was about 82.82%
 
