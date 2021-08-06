@@ -110,15 +110,6 @@ def generate_model_cnn(mode='patterns', pooling=0, layers=3, kernel=11):
     model.add(Dense(20, activation = 'relu'))
     model.add(Dropout(0.5))
     model.add(Dense(2, activation = 'softmax'))
-    model.add(Dense(4096, activation='relu',kernel_regularizer=regularizers.l2(0.001)))
-    model.add(Dropout(0.5))
-    model.add(Dense(1024, activation='relu',kernel_regularizer=regularizers.l2(0.001)))
-    model.add(Dropout(0.5))
-    model.add(Dense(256, activation='relu'))
-    model.add(Dropout(0.5))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dropout(0.3))
-    model.add(Dense(7, activation='softmax'))
     return model
 
 def generate_model(mode='patterns', summary=True):
